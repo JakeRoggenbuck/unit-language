@@ -97,4 +97,5 @@ export function next(content: string, start: number): Lex {
 }
 
 if (import.meta.main) {
+  console.log('Unit Language');
 }

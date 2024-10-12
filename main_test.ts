@@ -1,5 +1,5 @@
 import { assertEquals, assert } from '@std/assert';
-import { ends_token, tokenize, Token, TokenType, next } from './main.ts';
+import { ends_token, tokenize, TokenType, next } from './main.ts';
 
 Deno.test(function ends_token_test() {
   assert(ends_token(' '));
@@ -38,39 +38,38 @@ Deno.test(function tokenize_test() {
 });
 
 Deno.test(function next_test() {
-  let expr = '1 2 +';
+  const expr = '1 2 +';
 
-  let t = next(expr, 0);
+  const t = next(expr, 0);
   assertEquals(t.token, { text: '1', token_type: TokenType.NUM_LITERAL });
 
   assertEquals(t.index, 2);
 
-  let t2 = next(expr, 0);
+  const t2 = next(expr, 0);
   assertEquals(t2.token, { text: '1', token_type: TokenType.NUM_LITERAL });
 
   assertEquals(t2.index, 2);
 
-  let t3 = next(expr, t2.index);
+  const t3 = next(expr, t2.index);
   assertEquals(t3.token, { text: '2', token_type: TokenType.NUM_LITERAL });
 
   assertEquals(t3.index, 4);
 
-  let t4 = next(expr, t3.index);
+  const t4 = next(expr, t3.index);
   assertEquals(t4.token, { text: '+', token_type: TokenType.PLUS });
 });
 
-
 Deno.test(function next_test() {
-  let expr = '2 3 /';
+  const expr = '2 3 /';
 
-  let t = next(expr, 0);
+  const t = next(expr, 0);
   assertEquals(t.token, { text: '2', token_type: TokenType.NUM_LITERAL });
   assertEquals(t.index, 2);
 
-  let t2 = next(expr, t.index);
+  const t2 = next(expr, t.index);
   assertEquals(t2.token, { text: '3', token_type: TokenType.NUM_LITERAL });
   assertEquals(t2.index, 4);
 
-  let t3 = next(expr, t2.index);
+  const t3 = next(expr, t2.index);
   assertEquals(t3.token, { text: '/', token_type: TokenType.DIV });
 });
