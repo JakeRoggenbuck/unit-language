@@ -1,5 +1,5 @@
 import { assertEquals, assert } from '@std/assert';
-import { ends_token, tokenize, TokenType, next } from './main.ts';
+import { ends_token, tokenize, TokenType, next, parser } from './main.ts';
 
 Deno.test(function ends_token_test() {
   assert(ends_token(' '));
@@ -72,4 +72,18 @@ Deno.test(function next_test() {
 
   const t3 = next(expr, t2.index);
   assertEquals(t3.token, { text: '/', token_type: TokenType.DIV });
+});
+
+Deno.test(function parser_test() {
+  let s = parser('2 3 +');
+  assertEquals(s, [{ val: 5 }]);
+
+  s = parser('10 5 *');
+  assertEquals(s, [{ val: 50 }]);
+
+  s = parser('10 3 /');
+  assertEquals(s, [{ val: 10 / 3 }]);
+
+  s = parser('7 3 -');
+  assertEquals(s, [{ val: 4 }]);
 });
