@@ -17,6 +17,13 @@ In postfix for an operation of two arguments, you add two numbers to the stack, 
 - `*` multiply
 - `/` divide
 
+## Running
+```sh
+deno run dev
+```
+
+![image](https://github.com/user-attachments/assets/dfc55adc-6edc-4fb6-b061-7bf36597abaa)
+
 ## Running Tests
 ```sh
 deno test
