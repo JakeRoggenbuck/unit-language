@@ -29,6 +29,11 @@ deno run dev
 deno test
 ```
 
+## Running list
+```sh
+deno lint
+```
+
 #### Testings Running
 
 ![image](https://github.com/user-attachments/assets/9370b25e-6895-473b-8409-0900d81caab5)
