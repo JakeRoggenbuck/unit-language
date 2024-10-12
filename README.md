@@ -1,6 +1,10 @@
 ![unit lang dark mode](https://github.com/user-attachments/assets/2feae9fc-35cc-4fc1-9e34-1f4cc85f5d61#gh-dark-mode-only)
 ![unit lang light mode](https://github.com/user-attachments/assets/2200f691-db60-4e06-832a-160bf62bde62#gh-light-mode-only)
 
+[![TypeScript](https://img.shields.io/github/actions/workflow/status/jakeroggenbuck/unit-language/deno.yml?branch=main&style=for-the-badge)](https://github.com/JakeRoggenbuck/unit-language/actions)
+[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://github.com/JakeRoggenbuck?tab=repositories&q=&type=&language=typescript)
+![Deno JS](https://img.shields.io/badge/deno%20js-000000?style=for-the-badge&logo=deno&logoColor=white)
+
 A small programming language with postfix notation using [TypeScript](https://www.typescriptlang.org/) and [Deno](https://deno.com/).
 
 ## Syntax
