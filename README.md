@@ -7,3 +7,7 @@ A small programming language using postfix notation using [TypeScript](https://w
 ```sh
 deno test
 ```
+
+#### Testings Running
+
+![image](https://github.com/user-attachments/assets/9370b25e-6895-473b-8409-0900d81caab5)
