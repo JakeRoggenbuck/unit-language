@@ -3,7 +3,32 @@
 
 A small programming language using postfix notation using [TypeScript](https://www.typescriptlang.org/) and [Deno](https://deno.com/).
 
+## Syntax
+
+### Postfix
+In postfix for an operation of two arguments, you add two numbers to the stack, then the operator will pop the arguments off the stack. So adding `1` to `2` is the following.
+```
+1 2 +
+```
+
+### Operators
+- `+` addition
+- `-` subtraction
+- `*` multiply
+- `/` divide
+
+## Running
+```sh
+deno run dev
+```
+
+![image](https://github.com/user-attachments/assets/dfc55adc-6edc-4fb6-b061-7bf36597abaa)
+
 ## Running Tests
 ```sh
 deno test
 ```
+
+#### Testings Running
+
+![image](https://github.com/user-attachments/assets/9370b25e-6895-473b-8409-0900d81caab5)
