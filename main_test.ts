@@ -58,3 +58,19 @@ Deno.test(function next_test() {
   let t4 = next(expr, t3.index);
   assertEquals(t4.token, { text: '+', token_type: TokenType.PLUS });
 });
+
+
+Deno.test(function next_test() {
+  let expr = '2 3 /';
+
+  let t = next(expr, 0);
+  assertEquals(t.token, { text: '2', token_type: TokenType.NUM_LITERAL });
+  assertEquals(t.index, 2);
+
+  let t2 = next(expr, t.index);
+  assertEquals(t2.token, { text: '3', token_type: TokenType.NUM_LITERAL });
+  assertEquals(t2.index, 4);
+
+  let t3 = next(expr, t2.index);
+  assertEquals(t3.token, { text: '/', token_type: TokenType.DIV });
+});
