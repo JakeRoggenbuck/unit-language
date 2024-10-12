@@ -81,7 +81,7 @@ interface Lex {
 }
 
 export function next(content: string, start: number): Lex {
-  const buf: string = '';
+  let buf: string = '';
 
   for (let i = start; i <= content.length; i++) {
     buf += content[i];
