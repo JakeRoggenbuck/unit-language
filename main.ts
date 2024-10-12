@@ -39,6 +39,10 @@ export type Token = {
   token_type: TokenType;
 };
 
+export type Value = {
+  val: number;
+};
+
 export function tokenize(token_text: string): Token {
   let token_type = TokenType.NONE;
 
@@ -96,6 +100,84 @@ export function next(content: string, start: number): Lex {
   return { token: { text: buf, token_type: TokenType.NONE }, index: -1 };
 }
 
+export function parser(content: string) {
+  let stack: Value[] = [];
+
+  let index = 0;
+
+  while (index < content.length) {
+    let l: Lex = next(content, index);
+    index = l.index;
+    let token = l.token;
+
+    if (token.token_type === TokenType.NUM_LITERAL) {
+      stack.push({ val: Number(token.text) });
+    }
+
+    if (token.token_type === TokenType.PLUS) {
+      let b = stack.pop();
+      let a = stack.pop();
+
+      // Narrowing
+      if (a !== undefined && b !== undefined) {
+        stack.push({ val: a.val + b.val });
+      } else {
+        throw new Error('Not enough values on the stack');
+      }
+    }
+
+    if (token.token_type === TokenType.MUL) {
+      let b = stack.pop();
+      let a = stack.pop();
+
+      // Narrowing
+      if (a !== undefined && b !== undefined) {
+        stack.push({ val: a.val * b.val });
+      } else {
+        throw new Error('Not enough values on the stack');
+      }
+    }
+
+    if (token.token_type === TokenType.DIV) {
+      let b = stack.pop();
+      let a = stack.pop();
+
+      // Narrowing
+      if (a !== undefined && b !== undefined) {
+        stack.push({ val: a.val / b.val });
+      } else {
+        throw new Error('Not enough values on the stack');
+      }
+    }
+
+    if (token.token_type === TokenType.MINUS) {
+      let b = stack.pop();
+      let a = stack.pop();
+
+      // Narrowing
+      if (a !== undefined && b !== undefined) {
+        stack.push({ val: a.val - b.val });
+      } else {
+        throw new Error('Not enough values on the stack');
+      }
+    }
+  }
+
+  return stack;
+}
+
 if (import.meta.main) {
   console.log('Unit Language');
+
+  let s = parser('2 3 +');
+  console.log(s);
+
+  s = parser('10 5 *');
+  console.log(s);
+
+  s = parser('10 3 /');
+  console.log(s);
+
+  s = parser('7 3 -');
+  console.log(s);
 }
