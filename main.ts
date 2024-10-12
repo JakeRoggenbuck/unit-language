@@ -81,7 +81,7 @@ interface Lex {
 }
 
 export function next(content: string, start: number): Lex {
-  let buf: string = '';
+  const buf: string = '';
 
   for (let i = start; i <= content.length; i++) {
     buf += content[i];
@@ -101,22 +101,22 @@ export function next(content: string, start: number): Lex {
 }
 
 export function parser(content: string) {
-  let stack: Value[] = [];
+  const stack: Value[] = [];
 
   let index = 0;
 
   while (index < content.length) {
-    let l: Lex = next(content, index);
+    const l: Lex = next(content, index);
     index = l.index;
-    let token = l.token;
+    const token = l.token;
 
     if (token.token_type === TokenType.NUM_LITERAL) {
       stack.push({ val: Number(token.text) });
     }
 
     if (token.token_type === TokenType.PLUS) {
-      let b = stack.pop();
-      let a = stack.pop();
+      const b = stack.pop();
+      const a = stack.pop();
 
       // Narrowing
       if (a !== undefined && b !== undefined) {
@@ -127,20 +127,20 @@ export function parser(content: string) {
     }
 
     if (token.token_type === TokenType.MUL) {
-      let b = stack.pop();
-      let a = stack.pop();
+      const b = stack.pop();
+      const a = stack.pop();
 
       // Narrowing
       if (a !== undefined && b !== undefined) {
-        stack.push({ val: a.val * b.val });
+        stack.push({ val: a.val * b.val })
       } else {
         throw new Error('Not enough values on the stack');
       }
     }
 
     if (token.token_type === TokenType.DIV) {
-      let b = stack.pop();
-      let a = stack.pop();
+      const b = stack.pop();
+      const a = stack.pop();
 
       // Narrowing
       if (a !== undefined && b !== undefined) {
@@ -151,8 +151,8 @@ export function parser(content: string) {
     }
 
     if (token.token_type === TokenType.MINUS) {
-      let b = stack.pop();
-      let a = stack.pop();
+      const b = stack.pop();
+      const a = stack.pop();
 
       // Narrowing
       if (a !== undefined && b !== undefined) {
