@@ -21,6 +21,15 @@ In postfix for an operation of two arguments, you add two numbers to the stack, 
 - `*` multiply
 - `/` divide
 
+### Built-in Functions
+- `sin` sine function
+- `cos` cosine function
+- `tan` tangent function
+
+### Built-in Constants
+- `e` Euler's number
+- `pi` Pi
+
 ### Equations
 Unit-language can evaluate more complicated expressions too. 
 ```
