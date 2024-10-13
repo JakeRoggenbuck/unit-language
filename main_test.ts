@@ -74,6 +74,12 @@ Deno.test(function next_test() {
   assertEquals(t3.token, { text: '/', token_type: TokenType.DIV });
 });
 
+Deno.test(function consts_test() {
+  const expr = 'pi 1 +';
+  const t = next(expr, 0);
+  assertEquals(t.token, { text: 'pi', token_type: TokenType.PI });
+});
+
 Deno.test(function parser_test() {
   let s = parser('2 3 +');
   assertEquals(s, [{ val: 5 }]);
@@ -86,4 +92,24 @@ Deno.test(function parser_test() {
 
   s = parser('7 3 -');
   assertEquals(s, [{ val: 4 }]);
+});
+
+Deno.test(function parser_consts_test() {
+  let s = parser('pi 1 +');
+  assertEquals(s, [{ val: Math.PI + 1 }]);
+
+  s = parser('pi e *');
+  assertEquals(s, [{ val: Math.PI * Math.E }]);
+
+  s = parser('2');
+  assertEquals(s, [{ val: 2}]);
+
+  s = parser('2 sin');
+  assertEquals(s, [{ val: Math.sin(2)}]);
+
+  s = parser('e sin');
+  assertEquals(s, [{ val: Math.sin(Math.E)}]);
+
+  s = parser('e tan');
+  assertEquals(s, [{ val: Math.tan(Math.E)}]);
 });

@@ -31,6 +31,11 @@ export enum TokenType {
   MINUS,
   DIV,
   MUL,
+  SIN,
+  COS,
+  TAN,
+  PI,
+  E,
   NONE,
 }
 
@@ -64,6 +69,21 @@ export function tokenize(token_text: string): Token {
       break;
     case '/':
       token_type = TokenType.DIV;
+      break;
+    case 'sin':
+      token_type = TokenType.SIN;
+      break;
+    case 'cos':
+      token_type = TokenType.COS;
+      break;
+    case 'tan':
+      token_type = TokenType.TAN;
+      break;
+    case 'e':
+      token_type = TokenType.E;
+      break;
+    case 'pi':
+      token_type = TokenType.PI;
       break;
     default:
       if (isNumber(token_text)) {
@@ -101,11 +121,14 @@ export function next(content: string, start: number): Lex {
 }
 
 export function parser(content: string) {
+  // Add padding
+  content += ' ';
+
   const stack: Value[] = [];
 
   let index = 0;
 
-  while (index < content.length) {
+  while (index < content.length && index !== -1) {
     const l: Lex = next(content, index);
     index = l.index;
     const token = l.token;
@@ -126,13 +149,42 @@ export function parser(content: string) {
       }
     }
 
+    if (token.token_type === TokenType.PI) {
+      stack.push({ val: Math.PI });
+    }
+
+    if (token.token_type === TokenType.E) {
+      stack.push({ val: Math.E });
+    }
+
+    if (token.token_type === TokenType.SIN) {
+      const a = stack.pop();
+      if (a !== undefined) {
+        stack.push({ val: Math.sin(a.val) });
+      }
+    }
+
+    if (token.token_type === TokenType.TAN) {
+      const a = stack.pop();
+      if (a !== undefined) {
+        stack.push({ val: Math.tan(a.val) });
+      }
+    }
+
+    if (token.token_type === TokenType.COS) {
+      const a = stack.pop();
+      if (a !== undefined) {
+        stack.push({ val: Math.cos(a.val) });
+      }
+    }
+
     if (token.token_type === TokenType.MUL) {
       const b = stack.pop();
       const a = stack.pop();
 
       // Narrowing
       if (a !== undefined && b !== undefined) {
-        stack.push({ val: a.val * b.val })
+        stack.push({ val: a.val * b.val });
       } else {
         throw new Error('Not enough values on the stack');
       }
