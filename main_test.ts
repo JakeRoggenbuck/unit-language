@@ -102,14 +102,17 @@ Deno.test(function parser_consts_test() {
   assertEquals(s, [{ val: Math.PI * Math.E }]);
 
   s = parser('2');
-  assertEquals(s, [{ val: 2}]);
+  assertEquals(s, [{ val: 2 }]);
 
   s = parser('2 sin');
-  assertEquals(s, [{ val: Math.sin(2)}]);
+  assertEquals(s, [{ val: Math.sin(2) }]);
 
   s = parser('e sin');
-  assertEquals(s, [{ val: Math.sin(Math.E)}]);
+  assertEquals(s, [{ val: Math.sin(Math.E) }]);
 
   s = parser('e tan');
-  assertEquals(s, [{ val: Math.tan(Math.E)}]);
+  assertEquals(s, [{ val: Math.tan(Math.E) }]);
+
+  s = parser('2 3 + 9 - 8 * sin 5 -');
+  assertEquals(s, [{ val: -5.551426681241691 }]);
 });
