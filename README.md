@@ -21,6 +21,12 @@ In postfix for an operation of two arguments, you add two numbers to the stack, 
 - `*` multiply
 - `/` divide
 
+### Equations
+Unit-language can evaluate more complicated expressions too. 
+```
+2 3 + 9 - 8 * sin 5 -
+```
+
 ## Running
 ```sh
 deno run dev
